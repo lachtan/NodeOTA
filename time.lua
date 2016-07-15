@@ -3,8 +3,6 @@
 
 time = {}
 
-local floor = math.floor
-
 time.SecondsPerDay = 24 * 60 * 60
 time.SecondsPerYear = 365 * time.SecondsPerDay
 time.SecondsPerLeapYear = time.SecondsPerYear + time.SecondsPerDay
@@ -13,14 +11,15 @@ time.SecondsPerFourYear = 4 * time.SecondsPerYear + time.SecondsPerDay
 time.BaseDayInWeek = 4
 time.BaseYear = 1970
 
-time._days = {-1, 30, 58, 89, 119, 150, 180, 211, 242, 272, 303, 333, 364}
-time._lpdays = {}
-for i = 1, 2 do time._lpdays[i] = time._days[i] end
-for i = 3, 13 do time._lpdays[i] = time._days[i] + 1 end
+time.Days = {-1, 30, 58, 89, 119, 150, 180, 211, 242, 272, 303, 333, 364}
+time.LpDays = {}
+for i = 1, 2 do time.LpDays[i] = time.Days[i] end
+for i = 3, 13 do time.LpDays[i] = time.Days[i] + 1 end
 
 function time.gmtime(t)
+	local floor = math.floor
 	local year, dayInYear, month, day, dayInWeek, hour, minute, second
-	local mdays = time._days
+	local mdays = time.Days
 	second = t
 	-- First calculate the number of four-year-interval, so calculation
 	-- of leap year will be simple. Btw, because 2000 IS a leap year and
@@ -38,7 +37,7 @@ function time.gmtime(t)
 				year = year + 1   -- 1971, 1975, 1979,...
 				second = second - time.SecondsPerLeapYear
 			else        -- leap year
-				mdays = time._lpdays
+				mdays = time.LpDays
 			end
 		end
 	end
@@ -71,9 +70,11 @@ end
 
 function time.format(stamp)    
 	if stamp.second < 10 then
-		return string.format("%04d-%02d-%02d %02d:%02d:0%.6f", stamp.year, stamp.month, stamp.day, stamp.hour, stamp.minute, stamp.second)
+		return string.format("%04d-%02d-%02d %02d:%02d:0%.6f", 
+			stamp.year, stamp.month, stamp.day, stamp.hour, stamp.minute, stamp.second)
 	else
-		return string.format("%04d-%02d-%02d %02d:%02d:%.6f", stamp.year, stamp.month, stamp.day, stamp.hour, stamp.minute, stamp.second)
+		return string.format("%04d-%02d-%02d %02d:%02d:%.6f", 
+			stamp.year, stamp.month, stamp.day, stamp.hour, stamp.minute, stamp.second)
 	end
 end
 
