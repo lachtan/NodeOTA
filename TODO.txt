@@ -1,0 +1,19 @@
+
+
+
+-- mohl by se snazit kazdou hodinu obnovit cas
+-- jen pokud je dostupne pripojeni, nebo to proste ignorovat :)
+
+-- http://www.esp8266.com/viewtopic.php?f=19&t=8916
+-- http://stackoverflow.com/questions/17872997/how-do-i-convert-seconds-since-epoch-to-current-date-and-time
+-- http://www.esp8266.com/viewtopic.php?f=19&t=6831
+-- node.compile("funclib.lua")
+
+-- zmerit jak dlouho trva zapis na flash
+
+
+logovani
+
+-- teplomer s uspavanim
+-- staci logovat jednou za minutu
+-- pridat mereni casu
