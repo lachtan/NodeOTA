@@ -16,11 +16,11 @@ time.LpDays = {}
 for i = 1, 2 do time.LpDays[i] = time.Days[i] end
 for i = 3, 13 do time.LpDays[i] = time.Days[i] + 1 end
 
-function time.gmtime(t)
+function time.gmtime(sec)
 	local floor = math.floor
 	local year, dayInYear, month, day, dayInWeek, hour, minute, second
 	local mdays = time.Days
-	second = t
+	second = sec
 	-- First calculate the number of four-year-interval, so calculation
 	-- of leap year will be simple. Btw, because 2000 IS a leap year and
 	-- 2100 is out of range, this formula is so simple.
@@ -50,7 +50,7 @@ function time.gmtime(t)
 	month = month - 1
 	day = dayInYear - mdays[month]
 	-- Calculate day of week. Sunday is 0
-	dayInWeek = (floor(t / time.SecondsPerDay) + time.BaseDayInWeek) % 7
+	dayInWeek = (floor(sec / time.SecondsPerDay) + time.BaseDayInWeek) % 7
 	-- Calculate the time of day from the remaining seconds
 	hour = floor(second / 3600)
 	second = second - hour * 3600

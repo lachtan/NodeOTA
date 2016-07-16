@@ -5,13 +5,17 @@
 local VersionFileName = "version.txt"
 local currentVersion = nil
 
+local function currentVersion( ... )
+	-- body
+end
+
 local function downloadContent(url)
 end
 
 local function getVersionInfo()
 	-- vrati tabulku s informacemi
 	local content = downloadContent()
-	
+
 
 end
 
